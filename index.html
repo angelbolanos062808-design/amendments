@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Girls' Relaxed Shirt Size Flashcards</title>
+    <title>Folklorico Kids' Relaxed Shirt Flashcards</title>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&display=swap"
@@ -12,6 +13,7 @@
     >
 
     <style>
+
         /* =========================
            ROOT COLORS
         ========================= */
@@ -32,6 +34,7 @@
             --shadow: 0 20px 40px rgba(177, 128, 40, 0.35);
         }
 
+
         /* =========================
            RESET
         ========================= */
@@ -41,6 +44,7 @@
             margin: 0;
             padding: 0;
         }
+
 
         /* =========================
            BODY
@@ -64,8 +68,10 @@
             justify-content: center;
 
             color: var(--text);
+
             padding: 1.5rem;
         }
+
 
         /* =========================
            MAIN APP
@@ -76,26 +82,33 @@
             max-width: 950px;
         }
 
+
         /* =========================
            HEADER
         ========================= */
 
         .title {
             text-align: center;
+
             margin-bottom: 0.5rem;
 
             font-weight: 700;
+
             letter-spacing: 0.08em;
+
             text-transform: uppercase;
+
             font-size: 0.95rem;
 
             color: var(--accent-dark);
         }
 
+
         .heading {
             text-align: center;
 
             font-size: 2rem;
+
             font-weight: 800;
 
             margin-bottom: 0.25rem;
@@ -105,6 +118,7 @@
             text-shadow:
                 0 3px 0 rgba(255, 255, 255, 0.7);
         }
+
 
         .subtitle {
             text-align: center;
@@ -116,29 +130,40 @@
             margin-bottom: 1.3rem;
         }
 
+
         .subtitle strong {
             color: var(--accent-dark);
         }
 
+
         /* =========================
-           FLASHCARD
+           FLASHCARD CONTAINER
         ========================= */
 
         .card-wrapper {
             display: flex;
+
             justify-content: center;
 
             margin-bottom: 1rem;
         }
 
+
+        /* =========================
+           CARD
+        ========================= */
+
         .card {
             width: 100%;
+
             max-width: 650px;
+
             height: 560px;
 
             cursor: pointer;
 
             border-radius: 2rem;
+
             padding: 3px;
 
             background:
@@ -157,11 +182,15 @@
             overflow: hidden;
         }
 
+
         .card:hover {
-            transform: translateY(-4px) scale(1.02);
+            transform:
+                translateY(-4px)
+                scale(1.02);
 
             box-shadow:
-                0 26px 45px rgba(
+                0 26px 45px
+                rgba(
                     177,
                     128,
                     40,
@@ -169,10 +198,12 @@
                 );
         }
 
+
         .card-inner {
             position: relative;
 
             width: 100%;
+
             height: 100%;
 
             border-radius: 1.9rem;
@@ -187,18 +218,24 @@
             overflow: hidden;
         }
 
+
         /* =========================
            CARD FACES
         ========================= */
 
         .card-face {
             position: absolute;
+
             inset: 0;
 
-            padding: 1.8rem 2rem;
+            padding:
+                1.8rem
+                2rem;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
 
             transition:
@@ -208,36 +245,48 @@
             overflow-y: auto;
         }
 
+
         .card-front {
             opacity: 1;
+
             transform: translateX(0);
 
             z-index: 2;
         }
+
 
         .card-back {
             opacity: 0;
+
             transform: translateX(12px);
 
             z-index: 1;
+
             pointer-events: none;
         }
+
 
         .card.show-answer .card-front {
             opacity: 0;
+
             transform: translateX(-12px);
 
             z-index: 1;
+
             pointer-events: none;
         }
 
+
         .card.show-answer .card-back {
             opacity: 1;
+
             transform: translateX(0);
 
             z-index: 2;
+
             pointer-events: auto;
         }
+
 
         /* =========================
            CARD DECORATION
@@ -249,21 +298,30 @@
             position: absolute;
 
             width: 120px;
+
             height: 120px;
 
             border-radius: 999px;
 
-            background: rgba(255, 255, 255, 0.7);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
 
             opacity: 0.4;
 
             filter: blur(4px);
 
             top: -40px;
+
             right: -30px;
 
             pointer-events: none;
         }
+
 
         .card-face::after {
             content: "";
@@ -271,39 +329,53 @@
             position: absolute;
 
             width: 80px;
+
             height: 80px;
 
             border-radius: 999px;
 
-            background: rgba(255, 255, 255, 0.6);
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.6
+                );
 
             opacity: 0.5;
 
             filter: blur(2px);
 
             bottom: -30px;
+
             left: -20px;
 
             pointer-events: none;
         }
 
+
         .card-content {
             position: relative;
+
             z-index: 3;
 
             min-height: 100%;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
         }
 
+
         /* =========================
-           BADGES
+           BADGE
         ========================= */
 
         .badge {
             display: inline-flex;
+
             align-items: center;
 
             gap: 0.4rem;
@@ -311,6 +383,7 @@
             font-size: 0.8rem;
 
             text-transform: uppercase;
+
             letter-spacing: 0.15em;
 
             color: white;
@@ -331,7 +404,8 @@
                 0.4rem;
 
             box-shadow:
-                0 6px 14px rgba(
+                0 6px 14px
+                rgba(
                     245,
                     158,
                     11,
@@ -341,8 +415,10 @@
             width: max-content;
         }
 
+
         .badge-dot {
             width: 0.7rem;
+
             height: 0.7rem;
 
             border-radius: 999px;
@@ -351,8 +427,14 @@
 
             box-shadow:
                 0 0 0 4px
-                rgba(255, 255, 255, 0.7);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
         }
+
 
         /* =========================
            QUESTION
@@ -360,6 +442,7 @@
 
         .question-text {
             font-size: 2.1rem;
+
             font-weight: 800;
 
             line-height: 1.3;
@@ -369,6 +452,7 @@
             color: var(--accent-dark);
         }
 
+
         .flip-hint {
             font-size: 0.95rem;
 
@@ -377,15 +461,19 @@
             margin-top: 1rem;
 
             display: flex;
+
             align-items: center;
 
             gap: 0.35rem;
         }
 
+
         .flip-hint::before {
             content: "🔄";
+
             font-size: 1.1rem;
         }
+
 
         .ordinal {
             font-size: 0.95rem;
@@ -395,12 +483,14 @@
             text-align: right;
         }
 
+
         /* =========================
            ANSWER HEADER
         ========================= */
 
         .back-top {
             display: flex;
+
             justify-content: space-between;
 
             gap: 0.75rem;
@@ -410,17 +500,22 @@
             margin-top: 0.7rem;
         }
 
+
         .size-main {
             font-size: 2rem;
+
             font-weight: 800;
 
             color: var(--accent-dark);
         }
 
+
         .age-label {
             font-size: 0.95rem;
+
             color: var(--muted);
         }
+
 
         .tag-pill {
             font-size: 0.8rem;
@@ -433,39 +528,62 @@
 
             border:
                 2px dashed
-                rgba(139, 90, 43, 0.5);
+                rgba(
+                    139,
+                    90,
+                    43,
+                    0.5
+                );
 
             color: var(--accent-dark);
 
             background:
-                rgba(255, 255, 255, 0.7);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.7
+                );
 
             white-space: nowrap;
         }
+
 
         /* =========================
            MEASUREMENTS
         ========================= */
 
         .measurement-section {
-            margin-top: 0.75rem;
+            margin-top: 0.55rem;
 
             padding:
                 0.65rem
                 0.8rem;
 
             background:
-                rgba(255, 255, 255, 0.38);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.38
+                );
 
             border-radius: 0.9rem;
 
             border:
                 1px solid
-                rgba(139, 90, 43, 0.16);
+                rgba(
+                    139,
+                    90,
+                    43,
+                    0.16
+                );
         }
+
 
         .section-title {
             font-size: 0.78rem;
+
             font-weight: 800;
 
             letter-spacing: 0.12em;
@@ -475,19 +593,24 @@
             margin-bottom: 0.4rem;
         }
 
+
         .measurements {
             display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            gap: 0.25rem 1rem;
+            gap:
+                0.2rem
+                1rem;
         }
+
 
         .measurement {
             display: flex;
 
             justify-content: space-between;
+
             align-items: center;
 
             gap: 0.5rem;
@@ -496,14 +619,25 @@
 
             border-bottom:
                 1px dashed
-                rgba(139, 90, 43, 0.18);
+                rgba(
+                    139,
+                    90,
+                    43,
+                    0.18
+                );
 
             font-size: 0.82rem;
+
+            min-width: 0;
         }
+
 
         .measurement-name {
             color: var(--text);
+
+            padding-right: 0.25rem;
         }
+
 
         .measurement-value {
             color: var(--accent-dark);
@@ -513,6 +647,7 @@
             white-space: nowrap;
         }
 
+
         .foot-note {
             font-size: 0.78rem;
 
@@ -520,6 +655,7 @@
 
             margin-top: 0.6rem;
         }
+
 
         /* =========================
            CONTROLS
@@ -539,6 +675,7 @@
             margin-top: 0.8rem;
         }
 
+
         .left-buttons,
         .right-buttons {
             display: flex;
@@ -549,6 +686,7 @@
 
             align-items: center;
         }
+
 
         button {
             border: none;
@@ -587,6 +725,7 @@
                 background 0.12s ease;
         }
 
+
         button.primary {
             background:
                 linear-gradient(
@@ -603,17 +742,25 @@
                 0 7px 0 #e29a25;
         }
 
+
         button:hover {
             transform: translateY(-1px);
         }
+
 
         button:active {
             transform: translateY(3px);
 
             box-shadow:
                 0 3px 0
-                rgba(0, 0, 0, 0.15);
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
         }
+
 
         .counter {
             font-size: 0.85rem;
@@ -632,15 +779,20 @@
                 1px solid #f2cf87;
         }
 
+
         .mode-label {
             font-size: 0.8rem;
+
             color: var(--muted);
         }
 
+
         .mode-label span {
             color: var(--accent-dark);
+
             font-weight: 700;
         }
+
 
         /* =========================
            MOBILE
@@ -652,77 +804,92 @@
                 padding: 1rem;
             }
 
+
             .heading {
                 font-size: 1.7rem;
             }
+
 
             .subtitle {
                 font-size: 0.88rem;
             }
 
+
             .card {
-                height: 650px;
+                height: 680px;
             }
+
 
             .card-face {
                 padding:
-                    1.4rem
-                    1.35rem;
+                    1.25rem
+                    1.2rem;
             }
+
 
             .question-text {
                 font-size: 1.6rem;
             }
 
+
             .measurements {
                 grid-template-columns: 1fr;
             }
 
-            .measurement-section {
-                margin-top: 0.55rem;
-            }
 
             .measurement {
-                font-size: 0.82rem;
+                font-size: 0.78rem;
             }
+
 
             .controls {
                 justify-content: center;
             }
         }
+
     </style>
 </head>
+
 
 <body>
 
     <div class="app">
 
-        <!-- HEADER -->
+        <!-- =========================
+             HEADER
+        ========================= -->
+
         <div class="title">
             Flashcard Quiz
         </div>
 
+
         <div class="heading">
-            Girls' Relaxed Shirt Sizes
+            Folklorico Kids' Relaxed Shirt Sizes
         </div>
 
+
         <p class="subtitle">
-            Front:
-            <strong>
-                "What are the XS shirt measurements?"
-            </strong>
-            — Back: organized measurements for your shirt pattern.
-            Tap the card to reveal the measurements 💕
+            Study one complete relaxed shirt size at a time.
+            Tap the card to reveal
+            <strong>all of its measurements</strong>.
         </p>
 
-        <!-- FLASHCARD -->
+
+        <!-- =========================
+             FLASHCARD
+        ========================= -->
+
         <div class="card-wrapper">
 
             <div class="card" id="card">
 
                 <div class="card-inner">
 
-                    <!-- FRONT -->
+                    <!-- =========================
+                         FRONT
+                    ========================= -->
+
                     <div class="card-face card-front">
 
                         <div class="card-content">
@@ -734,12 +901,12 @@
                                     Size Question
                                 </div>
 
+
                                 <p
                                     class="question-text"
                                     id="question-text"
-                                >
-                                    What are the XS shirt measurements?
-                                </p>
+                                ></p>
+
 
                                 <p class="flip-hint">
                                     Tap to reveal the measurements!
@@ -747,18 +914,21 @@
 
                             </div>
 
-                            <div>
-                                <p
-                                    class="ordinal"
-                                    id="ordinal-label"
-                                ></p>
-                            </div>
+
+                            <p
+                                class="ordinal"
+                                id="ordinal-label"
+                            ></p>
 
                         </div>
 
                     </div>
 
-                    <!-- BACK -->
+
+                    <!-- =========================
+                         BACK
+                    ========================= -->
+
                     <div class="card-face card-back">
 
                         <div class="card-content">
@@ -770,19 +940,24 @@
                                     Pattern Measurements
                                 </div>
 
+
                                 <div class="back-top">
 
                                     <div>
+
                                         <p
                                             class="size-main"
                                             id="size-name"
                                         ></p>
 
+
                                         <p
                                             class="age-label"
                                             id="age-label"
                                         ></p>
+
                                     </div>
+
 
                                     <div class="tag-pill">
                                         Relaxed Fit
@@ -790,12 +965,17 @@
 
                                 </div>
 
-                                <!-- BODY -->
+
+                                <!-- =========================
+                                     BODY
+                                ========================= -->
+
                                 <div class="measurement-section">
 
                                     <div class="section-title">
                                         👕 BODY
                                     </div>
+
 
                                     <div class="measurements">
 
@@ -810,6 +990,7 @@
                                             ></span>
                                         </div>
 
+
                                         <div class="measurement">
                                             <span class="measurement-name">
                                                 Bust Width (flat)
@@ -820,6 +1001,7 @@
                                                 id="bustWidth"
                                             ></span>
                                         </div>
+
 
                                         <div class="measurement">
                                             <span class="measurement-name">
@@ -832,6 +1014,7 @@
                                             ></span>
                                         </div>
 
+
                                         <div class="measurement">
                                             <span class="measurement-name">
                                                 Hem Width (flat)
@@ -843,16 +1026,33 @@
                                             ></span>
                                         </div>
 
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Shirt Length
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="shirtLength"
+                                            ></span>
+                                        </div>
+
                                     </div>
 
                                 </div>
 
-                                <!-- NECK -->
+
+                                <!-- =========================
+                                     NECK
+                                ========================= -->
+
                                 <div class="measurement-section">
 
                                     <div class="section-title">
                                         🎀 NECK
                                     </div>
+
 
                                     <div class="measurements">
 
@@ -867,6 +1067,7 @@
                                             ></span>
                                         </div>
 
+
                                         <div class="measurement">
                                             <span class="measurement-name">
                                                 Neck Width (flat)
@@ -878,6 +1079,7 @@
                                             ></span>
                                         </div>
 
+
                                         <div class="measurement">
                                             <span class="measurement-name">
                                                 Front Neck Drop
@@ -888,6 +1090,7 @@
                                                 id="frontNeckDrop"
                                             ></span>
                                         </div>
+
 
                                         <div class="measurement">
                                             <span class="measurement-name">
@@ -904,16 +1107,22 @@
 
                                 </div>
 
-                                <!-- SHOULDERS -->
+
+                                <!-- =========================
+                                     SHOULDERS
+                                ========================= -->
+
                                 <div class="measurement-section">
 
                                     <div class="section-title">
                                         🧵 SHOULDERS
                                     </div>
 
+
                                     <div class="measurements">
 
                                         <div class="measurement">
+
                                             <span class="measurement-name">
                                                 Shoulder Width
                                             </span>
@@ -922,9 +1131,12 @@
                                                 class="measurement-value"
                                                 id="shoulder"
                                             ></span>
+
                                         </div>
 
+
                                         <div class="measurement">
+
                                             <span class="measurement-name">
                                                 Shoulder → Bust
                                             </span>
@@ -933,9 +1145,12 @@
                                                 class="measurement-value"
                                                 id="shoulderBust"
                                             ></span>
+
                                         </div>
 
+
                                         <div class="measurement">
+
                                             <span class="measurement-name">
                                                 Shoulder Slope
                                             </span>
@@ -944,13 +1159,110 @@
                                                 class="measurement-value"
                                                 id="shoulderSlope"
                                             ></span>
+
                                         </div>
 
                                     </div>
 
                                 </div>
 
-                                <!-- ...rest of the measurement sections... -->
+
+                                <!-- =========================
+                                     ARMHOLE
+                                ========================= -->
+
+                                <div class="measurement-section">
+
+                                    <div class="section-title">
+                                        💪 ARMHOLE
+                                    </div>
+
+
+                                    <div class="measurements">
+
+                                        <div class="measurement">
+
+                                            <span class="measurement-name">
+                                                Armhole Depth
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="armhole"
+                                            ></span>
+
+                                        </div>
+
+
+                                        <div class="measurement">
+
+                                            <span class="measurement-name">
+                                                Upper Arm
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="upperArm"
+                                            ></span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- =========================
+                                     SLEEVE
+                                ========================= -->
+
+                                <div class="measurement-section">
+
+                                    <div class="section-title">
+                                        🪡 SLEEVE
+                                    </div>
+
+
+                                    <div class="measurements">
+
+                                        <div class="measurement">
+
+                                            <span class="measurement-name">
+                                                Sleeve Length
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="sleeveLength"
+                                            ></span>
+
+                                        </div>
+
+
+                                        <div class="measurement">
+
+                                            <span class="measurement-name">
+                                                Sleeve Opening
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="sleeveOpening"
+                                            ></span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <p class="foot-note">
+                                    These are average starting measurements
+                                    for a relaxed kids' folklorico shirt.
+                                    For an actual costume, measure the dancer
+                                    and adjust the pattern as needed.
+                                </p>
 
                             </div>
 
@@ -964,13 +1276,19 @@
 
         </div>
 
-        <!-- CONTROLS -->
+
+        <!-- =========================
+             BUTTONS
+        ========================= -->
+
         <div class="controls">
 
             <div class="left-buttons">
+
                 <button id="prevBtn">
                     ← Previous
                 </button>
+
 
                 <button
                     class="primary"
@@ -978,7 +1296,9 @@
                 >
                     Next →
                 </button>
+
             </div>
+
 
             <div class="right-buttons">
 
@@ -986,6 +1306,7 @@
                     class="counter"
                     id="counter"
                 ></span>
+
 
                 <span class="mode-label">
                     Mode:
@@ -998,16 +1319,136 @@
 
     </div>
 
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
     <script>
 
         /* =========================
-           SHIRT SIZE DATA
+           SIZE DATA
         ========================= */
 
-        const sizes = [
-            // Your XS, S, M and L measurements
-            // from the new version go here.
-        ];
+        const sizes = {
+
+            XS: {
+                age: "Approx. ages 4–5",
+
+                bust: '26"',
+                bustWidth: '13"',
+
+                waist: '24"',
+                hemWidth: '14"',
+
+                neck: '14"',
+                neckWidth: '5"',
+
+                frontNeckDrop: '3"',
+                backNeckDrop: '1.5"',
+
+                shoulder: '11"',
+                shoulderBust: '5"',
+                shoulderSlope: '1"',
+
+                armhole: '5.5"',
+                upperArm: '9"',
+
+                sleeveLength: '15"',
+                sleeveOpening: '8"',
+
+                shirtLength: '19"'
+            },
+
+
+            S: {
+                age: "Approx. ages 6–7",
+
+                bust: '29"',
+                bustWidth: '14.5"',
+
+                waist: '25.5"',
+                hemWidth: '15.5"',
+
+                neck: '15"',
+                neckWidth: '5.25"',
+
+                frontNeckDrop: '3.25"',
+                backNeckDrop: '1.75"',
+
+                shoulder: '12"',
+                shoulderBust: '5.5"',
+                shoulderSlope: '1"',
+
+                armhole: '6"',
+                upperArm: '10"',
+
+                sleeveLength: '17"',
+                sleeveOpening: '8.5"',
+
+                shirtLength: '21"'
+            },
+
+
+            M: {
+                age: "Approx. ages 8–10",
+
+                bust: '32"',
+                bustWidth: '16"',
+
+                waist: '27"',
+                hemWidth: '17"',
+
+                neck: '16"',
+                neckWidth: '5.5"',
+
+                frontNeckDrop: '3.5"',
+                backNeckDrop: '2"',
+
+                shoulder: '13"',
+                shoulderBust: '6"',
+                shoulderSlope: '1.25"',
+
+                armhole: '6.5"',
+                upperArm: '11"',
+
+                sleeveLength: '19"',
+                sleeveOpening: '9"',
+
+                shirtLength: '23"'
+            },
+
+
+            L: {
+                age: "Approx. ages 10–12",
+
+                bust: '35"',
+                bustWidth: '17.5"',
+
+                waist: '29"',
+                hemWidth: '18.5"',
+
+                neck: '17"',
+                neckWidth: '5.75"',
+
+                frontNeckDrop: '3.75"',
+                backNeckDrop: '2.25"',
+
+                shoulder: '14"',
+                shoulderBust: '6.5"',
+                shoulderSlope: '1.25"',
+
+                armhole: '7"',
+                upperArm: '12"',
+
+                sleeveLength: '21"',
+                sleeveOpening: '9.5"',
+
+                shirtLength: '25"'
+            }
+
+        };
+
 
         /* =========================
            ELEMENTS
@@ -1028,50 +1469,191 @@
         const ageLabel =
             document.getElementById("age-label");
 
+        const counter =
+            document.getElementById("counter");
+
+
         /* =========================
-           CARD FUNCTION
+           SIZE ORDER
+        ========================= */
+
+        const sizeOrder = [
+            "XS",
+            "S",
+            "M",
+            "L"
+        ];
+
+
+        let currentIndex = 0;
+
+
+        /* =========================
+           MEASUREMENT FIELDS
+        ========================= */
+
+        const fields = [
+
+            "bust",
+            "bustWidth",
+
+            "waist",
+            "hemWidth",
+
+            "neck",
+            "neckWidth",
+
+            "frontNeckDrop",
+            "backNeckDrop",
+
+            "shoulder",
+            "shoulderBust",
+            "shoulderSlope",
+
+            "armhole",
+            "upperArm",
+
+            "sleeveLength",
+            "sleeveOpening",
+
+            "shirtLength"
+
+        ];
+
+
+        /* =========================
+           SHOW CARD
         ========================= */
 
         function showCard(index) {
 
-            const size = sizes[index];
+            const size =
+                sizeOrder[index];
 
-            card.classList.remove("show-answer");
+            const data =
+                sizes[size];
+
+
+            card.classList.remove(
+                "show-answer"
+            );
+
 
             questionText.textContent =
-                `What are the ${size.name} shirt measurements?`;
+                `What are the measurements for a ${size} relaxed folklorico shirt?`;
+
 
             ordinalLabel.textContent =
-                `${index + 1} of ${sizes.length}`;
+                `Card ${index + 1} of ${sizeOrder.length}`;
+
+
+            counter.textContent =
+                `${size} • ${index + 1} / ${sizeOrder.length}`;
+
 
             sizeName.textContent =
-                size.name;
+                `${size} — Relaxed`;
+
 
             ageLabel.textContent =
-                size.age;
+                data.age;
 
-            // Measurement values
-            // are filled here.
+
+            fields.forEach(
+                function(field) {
+
+                    const element =
+                        document.getElementById(field);
+
+
+                    if (element) {
+
+                        element.textContent =
+                            data[field];
+
+                    }
+
+                }
+            );
 
         }
+
 
         /* =========================
            FLIP CARD
         ========================= */
 
-        card.addEventListener("click", () => {
-            card.classList.toggle("show-answer");
-        });
+        card.addEventListener(
+            "click",
+            function() {
+
+                card.classList.toggle(
+                    "show-answer"
+                );
+
+            }
+        );
+
 
         /* =========================
-           START
+           NEXT BUTTON
         ========================= */
 
-        let currentIndex = 0;
+        document
+            .getElementById("nextBtn")
+            .addEventListener(
+                "click",
+                function() {
+
+                    currentIndex =
+                        (
+                            currentIndex + 1
+                        )
+                        % sizeOrder.length;
+
+
+                    showCard(
+                        currentIndex
+                    );
+
+                }
+            );
+
+
+        /* =========================
+           PREVIOUS BUTTON
+        ========================= */
+
+        document
+            .getElementById("prevBtn")
+            .addEventListener(
+                "click",
+                function() {
+
+                    currentIndex =
+                        (
+                            currentIndex - 1
+                            + sizeOrder.length
+                        )
+                        % sizeOrder.length;
+
+
+                    showCard(
+                        currentIndex
+                    );
+
+                }
+            );
+
+
+        /* =========================
+           START CARD
+        ========================= */
 
         showCard(currentIndex);
 
     </script>
 
 </body>
+
 </html>
