@@ -1,86 +1,1075 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Meta + title -->
-    
-    <!-- Google Font -->
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Girls' Relaxed Shirt Size Flashcards</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
     <style>
         /* =========================
-           ROOT VARIABLES
-           ========================= */
+           ROOT COLORS
+        ========================= */
+
+        :root {
+            --bg: #fdf7e3;
+            --bg-soft: #f9e8b9;
+            --card: #fff7c2;
+            --card-top: #ffe9a3;
+
+            --accent: #f59e0b;
+            --accent-soft: #fbbf24;
+            --accent-dark: #8b5a2b;
+
+            --text: #5b3b21;
+            --muted: #b28c5a;
+
+            --shadow: 0 20px 40px rgba(177, 128, 40, 0.35);
+        }
 
         /* =========================
-           GLOBAL STYLES
-           ========================= */
+           RESET
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+            font-family: "Baloo 2", system-ui, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #ffe9b0 0,
+                    #fdf7e3 40%,
+                    #f7e3ad 90%
+                );
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--text);
+            padding: 1.5rem;
+        }
+
+        /* =========================
+           MAIN APP
+        ========================= */
+
+        .app {
+            width: 100%;
+            max-width: 950px;
+        }
 
         /* =========================
            HEADER
-           ========================= */
+        ========================= */
+
+        .title {
+            text-align: center;
+            margin-bottom: 0.5rem;
+
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+
+            color: var(--accent-dark);
+        }
+
+        .heading {
+            text-align: center;
+
+            font-size: 2rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+
+            color: var(--accent-dark);
+
+            text-shadow:
+                0 3px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        .subtitle {
+            text-align: center;
+
+            font-size: 0.98rem;
+
+            color: var(--muted);
+
+            margin-bottom: 1.3rem;
+        }
+
+        .subtitle strong {
+            color: var(--accent-dark);
+        }
 
         /* =========================
            FLASHCARD
-           ========================= */
+        ========================= */
+
+        .card-wrapper {
+            display: flex;
+            justify-content: center;
+
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 650px;
+            height: 560px;
+
+            cursor: pointer;
+
+            border-radius: 2rem;
+            padding: 3px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffe6a3,
+                    #fbbf24
+                );
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease;
+
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.02);
+
+            box-shadow:
+                0 26px 45px rgba(
+                    177,
+                    128,
+                    40,
+                    0.45
+                );
+        }
+
+        .card-inner {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 1.9rem;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    var(--card-top),
+                    var(--card)
+                );
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           CARD FACES
+        ========================= */
+
+        .card-face {
+            position: absolute;
+            inset: 0;
+
+            padding: 1.8rem 2rem;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+
+            overflow-y: auto;
+        }
+
+        .card-front {
+            opacity: 1;
+            transform: translateX(0);
+
+            z-index: 2;
+        }
+
+        .card-back {
+            opacity: 0;
+            transform: translateX(12px);
+
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card.show-answer .card-front {
+            opacity: 0;
+            transform: translateX(-12px);
+
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card.show-answer .card-back {
+            opacity: 1;
+            transform: translateX(0);
+
+            z-index: 2;
+            pointer-events: auto;
+        }
+
+        /* =========================
+           CARD DECORATION
+        ========================= */
+
+        .card-face::before {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.7);
+
+            opacity: 0.4;
+
+            filter: blur(4px);
+
+            top: -40px;
+            right: -30px;
+
+            pointer-events: none;
+        }
+
+        .card-face::after {
+            content: "";
+
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+
+            border-radius: 999px;
+
+            background: rgba(255, 255, 255, 0.6);
+
+            opacity: 0.5;
+
+            filter: blur(2px);
+
+            bottom: -30px;
+            left: -20px;
+
+            pointer-events: none;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+
+            min-height: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* =========================
+           BADGES
+        ========================= */
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 0.4rem;
+
+            font-size: 0.8rem;
+
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--accent),
+                    var(--accent-soft)
+                );
+
+            border-radius: 999px;
+
+            padding:
+                0.25rem
+                0.85rem
+                0.25rem
+                0.4rem;
+
+            box-shadow:
+                0 6px 14px rgba(
+                    245,
+                    158,
+                    11,
+                    0.35
+                );
+
+            width: max-content;
+        }
+
+        .badge-dot {
+            width: 0.7rem;
+            height: 0.7rem;
+
+            border-radius: 999px;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(255, 255, 255, 0.7);
+        }
+
+        /* =========================
+           QUESTION
+        ========================= */
+
+        .question-text {
+            font-size: 2.1rem;
+            font-weight: 800;
+
+            line-height: 1.3;
+
+            margin-top: 2rem;
+
+            color: var(--accent-dark);
+        }
+
+        .flip-hint {
+            font-size: 0.95rem;
+
+            color: var(--muted);
+
+            margin-top: 1rem;
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.35rem;
+        }
+
+        .flip-hint::before {
+            content: "🔄";
+            font-size: 1.1rem;
+        }
+
+        .ordinal {
+            font-size: 0.95rem;
+
+            color: var(--muted);
+
+            text-align: right;
+        }
+
+        /* =========================
+           ANSWER HEADER
+        ========================= */
+
+        .back-top {
+            display: flex;
+            justify-content: space-between;
+
+            gap: 0.75rem;
+
+            align-items: flex-start;
+
+            margin-top: 0.7rem;
+        }
+
+        .size-main {
+            font-size: 2rem;
+            font-weight: 800;
+
+            color: var(--accent-dark);
+        }
+
+        .age-label {
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .tag-pill {
+            font-size: 0.8rem;
+
+            padding:
+                0.3rem
+                0.85rem;
+
+            border-radius: 999px;
+
+            border:
+                2px dashed
+                rgba(139, 90, 43, 0.5);
+
+            color: var(--accent-dark);
+
+            background:
+                rgba(255, 255, 255, 0.7);
+
+            white-space: nowrap;
+        }
 
         /* =========================
            MEASUREMENTS
-           ========================= */
+        ========================= */
+
+        .measurement-section {
+            margin-top: 0.75rem;
+
+            padding:
+                0.65rem
+                0.8rem;
+
+            background:
+                rgba(255, 255, 255, 0.38);
+
+            border-radius: 0.9rem;
+
+            border:
+                1px solid
+                rgba(139, 90, 43, 0.16);
+        }
+
+        .section-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+
+            letter-spacing: 0.12em;
+
+            color: var(--accent-dark);
+
+            margin-bottom: 0.4rem;
+        }
+
+        .measurements {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 0.25rem 1rem;
+        }
+
+        .measurement {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 0.5rem;
+
+            padding: 0.18rem 0;
+
+            border-bottom:
+                1px dashed
+                rgba(139, 90, 43, 0.18);
+
+            font-size: 0.82rem;
+        }
+
+        .measurement-name {
+            color: var(--text);
+        }
+
+        .measurement-value {
+            color: var(--accent-dark);
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .foot-note {
+            font-size: 0.78rem;
+
+            color: var(--muted);
+
+            margin-top: 0.6rem;
+        }
 
         /* =========================
-           BUTTONS / CONTROLS
-           ========================= */
+           CONTROLS
+        ========================= */
+
+        .controls {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 0.7rem;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 0.8rem;
+        }
+
+        .left-buttons,
+        .right-buttons {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 0.45rem;
+
+            align-items: center;
+        }
+
+        button {
+            border: none;
+
+            border-radius: 999px;
+
+            padding:
+                0.55rem
+                1.1rem;
+
+            font-size: 0.9rem;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.35rem;
+
+            background: #fff2c4;
+
+            color: var(--accent-dark);
+
+            border:
+                2px solid #f5d08a;
+
+            box-shadow:
+                0 6px 0 #f0b754;
+
+            transition:
+                transform 0.12s ease,
+                box-shadow 0.12s ease,
+                background 0.12s ease;
+        }
+
+        button.primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffd65a,
+                    #ffb347
+                );
+
+            border-color: #f59e0b;
+
+            color: #7b4a1b;
+
+            box-shadow:
+                0 7px 0 #e29a25;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(3px);
+
+            box-shadow:
+                0 3px 0
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .counter {
+            font-size: 0.85rem;
+
+            color: var(--accent-dark);
+
+            padding:
+                0.3rem
+                0.8rem;
+
+            border-radius: 999px;
+
+            background: #fff3cc;
+
+            border:
+                1px solid #f2cf87;
+        }
+
+        .mode-label {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .mode-label span {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
 
         /* =========================
            MOBILE
-           ========================= */
+        ========================= */
+
+        @media (max-width: 640px) {
+
+            body {
+                padding: 1rem;
+            }
+
+            .heading {
+                font-size: 1.7rem;
+            }
+
+            .subtitle {
+                font-size: 0.88rem;
+            }
+
+            .card {
+                height: 650px;
+            }
+
+            .card-face {
+                padding:
+                    1.4rem
+                    1.35rem;
+            }
+
+            .question-text {
+                font-size: 1.6rem;
+            }
+
+            .measurements {
+                grid-template-columns: 1fr;
+            }
+
+            .measurement-section {
+                margin-top: 0.55rem;
+            }
+
+            .measurement {
+                font-size: 0.82rem;
+            }
+
+            .controls {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- =========================
-         MAIN CONTAINER
-         ========================= -->
-
     <div class="app">
 
         <!-- HEADER -->
+        <div class="title">
+            Flashcard Quiz
+        </div>
+
+        <div class="heading">
+            Girls' Relaxed Shirt Sizes
+        </div>
+
+        <p class="subtitle">
+            Front:
+            <strong>
+                "What are the XS shirt measurements?"
+            </strong>
+            — Back: organized measurements for your shirt pattern.
+            Tap the card to reveal the measurements 💕
+        </p>
 
         <!-- FLASHCARD -->
+        <div class="card-wrapper">
+
+            <div class="card" id="card">
+
+                <div class="card-inner">
+
+                    <!-- FRONT -->
+                    <div class="card-face card-front">
+
+                        <div class="card-content">
+
+                            <div>
+
+                                <div class="badge">
+                                    <span class="badge-dot"></span>
+                                    Size Question
+                                </div>
+
+                                <p
+                                    class="question-text"
+                                    id="question-text"
+                                >
+                                    What are the XS shirt measurements?
+                                </p>
+
+                                <p class="flip-hint">
+                                    Tap to reveal the measurements!
+                                </p>
+
+                            </div>
+
+                            <div>
+                                <p
+                                    class="ordinal"
+                                    id="ordinal-label"
+                                ></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BACK -->
+                    <div class="card-face card-back">
+
+                        <div class="card-content">
+
+                            <div>
+
+                                <div class="badge">
+                                    <span class="badge-dot"></span>
+                                    Pattern Measurements
+                                </div>
+
+                                <div class="back-top">
+
+                                    <div>
+                                        <p
+                                            class="size-main"
+                                            id="size-name"
+                                        ></p>
+
+                                        <p
+                                            class="age-label"
+                                            id="age-label"
+                                        ></p>
+                                    </div>
+
+                                    <div class="tag-pill">
+                                        Relaxed Fit
+                                    </div>
+
+                                </div>
+
+                                <!-- BODY -->
+                                <div class="measurement-section">
+
+                                    <div class="section-title">
+                                        👕 BODY
+                                    </div>
+
+                                    <div class="measurements">
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Bust / Chest
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="bust"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Bust Width (flat)
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="bustWidth"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Waist
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="waist"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Hem Width (flat)
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="hemWidth"
+                                            ></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- NECK -->
+                                <div class="measurement-section">
+
+                                    <div class="section-title">
+                                        🎀 NECK
+                                    </div>
+
+                                    <div class="measurements">
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Neck Opening
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="neck"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Neck Width (flat)
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="neckWidth"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Front Neck Drop
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="frontNeckDrop"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Back Neck Drop
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="backNeckDrop"
+                                            ></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- SHOULDERS -->
+                                <div class="measurement-section">
+
+                                    <div class="section-title">
+                                        🧵 SHOULDERS
+                                    </div>
+
+                                    <div class="measurements">
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Shoulder Width
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="shoulder"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Shoulder → Bust
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="shoulderBust"
+                                            ></span>
+                                        </div>
+
+                                        <div class="measurement">
+                                            <span class="measurement-name">
+                                                Shoulder Slope
+                                            </span>
+
+                                            <span
+                                                class="measurement-value"
+                                                id="shoulderSlope"
+                                            ></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- ...rest of the measurement sections... -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
         <!-- CONTROLS -->
+        <div class="controls">
+
+            <div class="left-buttons">
+                <button id="prevBtn">
+                    ← Previous
+                </button>
+
+                <button
+                    class="primary"
+                    id="nextBtn"
+                >
+                    Next →
+                </button>
+            </div>
+
+            <div class="right-buttons">
+
+                <span
+                    class="counter"
+                    id="counter"
+                ></span>
+
+                <span class="mode-label">
+                    Mode:
+                    <span>Flashcards</span>
+                </span>
+
+            </div>
+
+        </div>
 
     </div>
 
     <script>
 
-        // =========================
-        // SHIRT SIZE DATA
-        // =========================
+        /* =========================
+           SHIRT SIZE DATA
+        ========================= */
 
         const sizes = [
-            // XS
-            // S
-            // M
-            // L
+            // Your XS, S, M and L measurements
+            // from the new version go here.
         ];
 
-        // =========================
-        // ELEMENTS
-        // =========================
+        /* =========================
+           ELEMENTS
+        ========================= */
 
-        // =========================
-        // CARD FUNCTIONS
-        // =========================
+        const card =
+            document.getElementById("card");
 
-        // =========================
-        // BUTTON EVENTS
-        // =========================
+        const questionText =
+            document.getElementById("question-text");
 
-        // =========================
-        // START
-        // =========================
+        const ordinalLabel =
+            document.getElementById("ordinal-label");
+
+        const sizeName =
+            document.getElementById("size-name");
+
+        const ageLabel =
+            document.getElementById("age-label");
+
+        /* =========================
+           CARD FUNCTION
+        ========================= */
+
+        function showCard(index) {
+
+            const size = sizes[index];
+
+            card.classList.remove("show-answer");
+
+            questionText.textContent =
+                `What are the ${size.name} shirt measurements?`;
+
+            ordinalLabel.textContent =
+                `${index + 1} of ${sizes.length}`;
+
+            sizeName.textContent =
+                size.name;
+
+            ageLabel.textContent =
+                size.age;
+
+            // Measurement values
+            // are filled here.
+
+        }
+
+        /* =========================
+           FLIP CARD
+        ========================= */
+
+        card.addEventListener("click", () => {
+            card.classList.toggle("show-answer");
+        });
+
+        /* =========================
+           START
+        ========================= */
+
+        let currentIndex = 0;
+
+        showCard(currentIndex);
 
     </script>
 
