@@ -1,562 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <title>US Amendments Flashcard Quiz</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Bubbly cartoon-ish font -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#fdf7e3;          /* soft cream */
-      --bg-soft:#f9e8b9;     /* pale yellow */
-      --card:#fff7c2;        /* light card yellow */
-      --card-top:#ffe9a3;    /* slightly darker top gradient */
-      --accent:#f59e0b;      /* warm golden orange */
-      --accent-soft:#fbbf24; /* soft gold */
-      --accent-dark:#8b5a2b; /* brown */
-      --text:#5b3b21;        /* brown text */
-      --muted:#b28c5a;       /* lighter brown */
-      --shadow:0 20px 40px rgba(177, 128, 40, 0.35);
-    }
+    <!-- Meta + title -->
+    
+    <!-- Google Font -->
+    
+    <style>
+        /* =========================
+           ROOT VARIABLES
+           ========================= */
 
-    *{box-sizing:border-box;margin:0;padding:0;}
+        /* =========================
+           GLOBAL STYLES
+           ========================= */
 
-    body{
-      font-family:"Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at top, #ffe9b0 0, #fdf7e3 40%, #f7e3ad 90%);
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--text);
-      padding:1.5rem;
-    }
+        /* =========================
+           HEADER
+           ========================= */
 
-    .app{
-      max-width:950px;
-      width:100%;
-    }
+        /* =========================
+           FLASHCARD
+           ========================= */
 
-    .title{
-      text-align:center;
-      margin-bottom:0.5rem;
-      font-weight:700;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      font-size:0.95rem;
-      color:var(--accent-dark);
-    }
+        /* =========================
+           MEASUREMENTS
+           ========================= */
 
-    .heading{
-      text-align:center;
-      font-size:2rem;
-      font-weight:800;
-      margin-bottom:0.25rem;
-      color:var(--accent-dark);
-      text-shadow:0 3px 0 rgba(255,255,255,0.7);
-    }
+        /* =========================
+           BUTTONS / CONTROLS
+           ========================= */
 
-    .subtitle{
-      text-align:center;
-      font-size:0.98rem;
-      color:var(--muted);
-      margin-bottom:1.3rem;
-    }
-
-    .subtitle strong{
-      color:var(--accent-dark);
-    }
-
-    .card-wrapper{
-      display:flex;
-      justify-content:center;
-      margin-bottom:1rem;
-    }
-
-    .card{
-      width:100%;
-      max-width:540px;
-      height:340px;
-      cursor:pointer;
-      border-radius:2rem;
-      padding:3px;
-      background:linear-gradient(135deg, #ffe6a3, #fbbf24);
-      box-shadow:var(--shadow);
-      transition:transform 0.18s ease, box-shadow 0.18s ease;
-      overflow:hidden;
-    }
-
-    .card:hover{
-      transform:translateY(-4px) scale(1.02);
-      box-shadow:0 26px 45px rgba(177, 128, 40, 0.45);
-    }
-
-    .card-inner{
-      position:relative;
-      width:100%;
-      height:100%;
-      border-radius:1.9rem;
-      background:radial-gradient(circle at top, var(--card-top), var(--card));
-      overflow:hidden;
-      padding:1.8rem 2rem;
-    }
-
-    .card-face{
-      position:absolute;
-      inset:0;
-      padding:1.8rem 2rem;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      transition:opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .card-front{
-      opacity:1;
-      transform:translateX(0);
-      z-index:2;
-    }
-
-    .card-back{
-      opacity:0;
-      transform:translateX(12px);
-      z-index:1;
-    }
-
-    .card.show-answer .card-front{
-      opacity:0;
-      transform:translateX(-12px);
-      z-index:1;
-      pointer-events:none;
-    }
-
-    .card.show-answer .card-back{
-      opacity:1;
-      transform:translateX(0);
-      z-index:2;
-      pointer-events:auto;
-    }
-
-    .card-face::before{
-      content:"";
-      position:absolute;
-      width:120px;
-      height:120px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.7);
-      opacity:0.4;
-      filter:blur(4px);
-      top:-40px;
-      right:-30px;
-      pointer-events:none;
-    }
-
-    .card-face::after{
-      content:"";
-      position:absolute;
-      width:80px;
-      height:80px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.6);
-      opacity:0.5;
-      filter:blur(2px);
-      bottom:-30px;
-      left:-20px;
-      pointer-events:none;
-    }
-
-    .card-content{
-      position:relative;
-      z-index:3;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .badge{
-      position:relative;
-      display:inline-flex;
-      align-items:center;
-      gap:0.4rem;
-      font-size:0.8rem;
-      text-transform:uppercase;
-      letter-spacing:0.15em;
-      color:#fff;
-      background:linear-gradient(135deg, var(--accent), var(--accent-soft));
-      border-radius:999px;
-      padding:0.25rem 0.85rem 0.25rem 0.4rem;
-      box-shadow:0 6px 14px rgba(245, 158, 11, 0.35);
-      z-index:4;
-    }
-
-    .badge-dot{
-      width:0.7rem;
-      height:0.7rem;
-      border-radius:999px;
-      background:#fff;
-      box-shadow:0 0 0 4px rgba(255,255,255,0.7);
-    }
-
-    .question-text{
-      font-size:1.6rem;
-      font-weight:700;
-      line-height:1.3;
-      margin-top:0.6rem;
-    }
-
-    .flip-hint{
-      font-size:0.95rem;
-      color:var(--muted);
-      margin-top:0.6rem;
-      display:flex;
-      align-items:center;
-      gap:0.35rem;
-    }
-
-    .flip-hint::before{
-      content:"🔄";
-      font-size:1.1rem;
-    }
-
-    .ordinal{
-      font-size:0.95rem;
-      color:var(--muted);
-      text-align:right;
-    }
-
-    .back-top{
-      display:flex;
-      justify-content:space-between;
-      gap:0.75rem;
-      align-items:flex-start;
-      margin-top:0.4rem;
-    }
-
-    .amendment-main{
-      font-size:1.45rem;
-      font-weight:800;
-      color:var(--accent-dark);
-    }
-
-    .tag-pill{
-      font-size:0.8rem;
-      padding:0.3rem 0.85rem;
-      border-radius:999px;
-      border:2px dashed rgba(139, 90, 43, 0.5);
-      color:var(--accent-dark);
-      background:rgba(255,255,255,0.7);
-      white-space:nowrap;
-    }
-
-    .known-for{
-      margin-top:1rem;
-      font-size:1.02rem;
-      line-height:1.6;
-    }
-
-    .term{
-      font-size:0.9rem;
-      color:var(--muted);
-      margin-top:0.2rem;
-    }
-
-    .foot-note{
-      font-size:0.8rem;
-      color:var(--muted);
-      margin-top:0.6rem;
-    }
-
-    .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.7rem;
-      align-items:center;
-      justify-content:space-between;
-      margin-top:0.8rem;
-    }
-
-    .left-buttons,
-    .right-buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.45rem;
-      align-items:center;
-    }
-
-    button{
-      border:none;
-      border-radius:999px;
-      padding:0.55rem 1.1rem;
-      font-size:0.9rem;
-      font-weight:600;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:0.35rem;
-      background:#fff2c4;
-      color:var(--accent-dark);
-      border:2px solid #f5d08a;
-      box-shadow:0 6px 0 #f0b754;
-      transition:transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, translate 0.12s ease;
-    }
-
-    button.primary{
-      background:linear-gradient(135deg, #ffd65a, #ffb347);
-      border-color:#f59e0b;
-      color:#7b4a1b;
-      box-shadow:0 7px 0 #e29a25;
-    }
-
-    button:hover{
-      transform:translateY(-1px);
-    }
-
-    button:active{
-      transform:translateY(3px);
-      box-shadow:0 3px 0 rgba(0,0,0,0.15);
-    }
-
-    button[disabled]{
-      opacity:0.6;
-      cursor:not-allowed;
-      box-shadow:none;
-      transform:none;
-    }
-
-    .counter{
-      font-size:0.85rem;
-      color:var(--accent-dark);
-      padding:0.3rem 0.8rem;
-      border-radius:999px;
-      background:#fff3cc;
-      border:1px solid #f2cf87;
-    }
-
-    .mode-label{
-      font-size:0.8rem;
-      color:var(--muted);
-    }
-
-    .mode-label span{
-      color:var(--accent-dark);
-      font-weight:700;
-    }
-
-    @media (max-width:640px){
-      .heading{font-size:1.7rem;}
-      .card{
-        height:320px;
-      }
-      .card-inner{
-        padding:1.4rem 1.35rem;
-      }
-      .card-face{
-        padding:1.4rem 1.35rem;
-      }
-      .question-text{
-        font-size:1.35rem;
-      }
-      .known-for{
-        font-size:0.95rem;
-      }
-    }
-  </style>
+        /* =========================
+           MOBILE
+           ========================= */
+    </style>
 </head>
+
 <body>
-  <div class="app">
-    <div class="title">Flashcard Quiz</div>
-    <div class="heading">1st–27th Amendments</div>
-    <p class="subtitle">
-      Front: <strong>“What is the ___ Amendment mainly about?”</strong> &mdash; Back: nickname, summary, and year ratified.  
-      Tap / click the big card to switch between question and answer 💭
-    </p>
 
-    <div class="card-wrapper">
-      <div class="card" id="card">
-        <div class="card-inner">
-          <!-- Front -->
-          <div class="card-face card-front">
-            <div class="card-content">
-              <div>
-                <div class="badge">
-                  <span class="badge-dot"></span>
-                  Question
-                </div>
-                <p class="question-text" id="question-text">
-                  <!-- filled by JS -->
-                </p>
-                <p class="flip-hint">
-                  Tap to reveal the amendment!
-                </p>
-              </div>
-              <div>
-                <p class="ordinal" id="ordinal-label"></p>
-              </div>
-            </div>
-          </div>
+    <!-- =========================
+         MAIN CONTAINER
+         ========================= -->
 
-          <!-- Back -->
-          <div class="card-face card-back">
-            <div class="card-content">
-              <div>
-                <div class="badge">
-                  <span class="badge-dot"></span>
-                  Answer
-                </div>
+    <div class="app">
 
-                <div class="back-top">
-                  <div>
-                    <p class="amendment-main" id="amendment-name"></p>
-                    <p class="term" id="amendment-year"></p>
-                  </div>
-                  <div class="tag-pill" id="amendment-tag"></div>
-                </div>
+        <!-- HEADER -->
 
-                <p class="known-for" id="amendment-summary"></p>
-                <p class="foot-note">Tap again to go back to the question 🔁</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <!-- FLASHCARD -->
+
+        <!-- CONTROLS -->
+
     </div>
 
-    <div class="controls">
-      <div class="left-buttons">
-        <button id="prev-btn">
-          ⬅ Previous
-        </button>
-        <button id="next-btn" class="primary">
-          Next ➜
-        </button>
-      </div>
-      <div class="right-buttons">
-        <span class="counter" id="counter"></span>
-        <button id="shuffle-btn">
-          🔀 Shuffle
-        </button>
-        <span class="mode-label">Mode: <span>Ordered (1–27)</span></span>
-      </div>
-    </div>
-  </div>
+    <script>
 
-  <script>
-    // 1st–27th Amendments
-    const amendments = [
-      { number: 1, name: "1st Amendment", tag: "Freedoms of Expression", year: "Ratified 1791", summary: "Protects freedom of religion, speech, press, assembly, and the right to petition the government." },
-      { number: 2, name: "2nd Amendment", tag: "Right to Bear Arms", year: "Ratified 1791", summary: "Protects the right of the people to keep and bear arms." },
-      { number: 3, name: "3rd Amendment", tag: "Quartering Soldiers", year: "Ratified 1791", summary: "Government cannot force people to house soldiers in their homes in peacetime without consent." },
-      { number: 4, name: "4th Amendment", tag: "Search & Seizure", year: "Ratified 1791", summary: "Protects against unreasonable searches and seizures; requires warrants based on probable cause." },
-      { number: 5, name: "5th Amendment", tag: "Rights of the Accused", year: "Ratified 1791", summary: "Includes due process, protection against self-incrimination, double jeopardy, and rules for eminent domain." },
-      { number: 6, name: "6th Amendment", tag: "Criminal Trials", year: "Ratified 1791", summary: "Guarantees a speedy and public trial, an impartial jury, a lawyer, and the right to confront witnesses in criminal cases." },
-      { number: 7, name: "7th Amendment", tag: "Civil Jury Trial", year: "Ratified 1791", summary: "Guarantees the right to a jury trial in certain civil cases." },
-      { number: 8, name: "8th Amendment", tag: "Punishments & Bail", year: "Ratified 1791", summary: "Bans excessive bail, excessive fines, and cruel and unusual punishments." },
-      { number: 9, name: "9th Amendment", tag: "Other Rights", year: "Ratified 1791", summary: "Says that people have rights beyond those listed specifically in the Constitution." },
-      { number: 10, name: "10th Amendment", tag: "Reserved Powers", year: "Ratified 1791", summary: "Powers not given to the federal government are reserved to the states or the people." },
-      { number: 11, name: "11th Amendment", tag: "Suits Against States", year: "Ratified 1795", summary: "Limits lawsuits against states in federal court." },
-      { number: 12, name: "12th Amendment", tag: "Election of President & VP", year: "Ratified 1804", summary: "Changes the procedure for electing the President and Vice President, creating separate ballots." },
-      { number: 13, name: "13th Amendment", tag: "Abolishes Slavery", year: "Ratified 1865", summary: "Abolishes slavery and involuntary servitude in the United States, except as punishment for a crime." },
-      { number: 14, name: "14th Amendment", tag: "Citizenship & Equal Protection", year: "Ratified 1868", summary: "Defines U.S. citizenship and guarantees due process and equal protection of the laws." },
-      { number: 15, name: "15th Amendment", tag: "Voting Rights (Race)", year: "Ratified 1870", summary: "Prohibits denying the right to vote based on race, color, or previous condition of servitude." },
-      { number: 16, name: "16th Amendment", tag: "Income Tax", year: "Ratified 1913", summary: "Gives Congress the power to collect a federal income tax." },
-      { number: 17, name: "17th Amendment", tag: "Direct Election of Senators", year: "Ratified 1913", summary: "Senators are elected directly by the people, instead of by state legislatures." },
-      { number: 18, name: "18th Amendment", tag: "Prohibition of Alcohol", year: "Ratified 1919", summary: "Banned the manufacture, sale, and transportation of alcoholic beverages (later repealed by the 21st)." },
-      { number: 19, name: "19th Amendment", tag: "Women’s Suffrage", year: "Ratified 1920", summary: "Prohibits denying the right to vote based on sex, giving women the right to vote nationwide." },
-      { number: 20, name: "20th Amendment", tag: "Lame Duck Amendment", year: "Ratified 1933", summary: "Changes the start dates of presidential and congressional terms and addresses presidential succession issues." },
-      { number: 21, name: "21st Amendment", tag: "Repeals Prohibition", year: "Ratified 1933", summary: "Repeals the 18th Amendment and ends nationwide Prohibition." },
-      { number: 22, name: "22nd Amendment", tag: "Two-Term Limit", year: "Ratified 1951", summary: "Limits the President to two elected terms in office." },
-      { number: 23, name: "23rd Amendment", tag: "D.C. Electors", year: "Ratified 1961", summary: "Gives Washington, D.C. electoral votes in presidential elections." },
-      { number: 24, name: "24th Amendment", tag: "No Poll Tax", year: "Ratified 1964", summary: "Bans poll taxes in federal elections, helping protect voting rights." },
-      { number: 25, name: "25th Amendment", tag: "Presidential Succession", year: "Ratified 1967", summary: "Clarifies presidential succession and procedures for when the President is disabled or the office is vacant." },
-      { number: 26, name: "26th Amendment", tag: "Voting Age 18", year: "Ratified 1971", summary: "Lowes the voting age from 21 to 18 in all elections." },
-      { number: 27, name: "27th Amendment", tag: "Congressional Pay", year: "Ratified 1992", summary: "Says any change in pay for members of Congress takes effect only after the next election." }
-    ];
+        // =========================
+        // SHIRT SIZE DATA
+        // =========================
 
-    function getOrdinal(n){
-      const s = ["th","st","nd","rd"],
-            v = n % 100;
-      return n + (s[(v-20)%10] || s[v] || s[0]);
-    }
+        const sizes = [
+            // XS
+            // S
+            // M
+            // L
+        ];
 
-    const card = document.getElementById("card");
-    const qText = document.getElementById("question-text");
-    const ordinalLabel = document.getElementById("ordinal-label");
-    const nameEl = document.getElementById("amendment-name");
-    const tagEl = document.getElementById("amendment-tag");
-    const yearEl = document.getElementById("amendment-year");
-    const summaryEl = document.getElementById("amendment-summary");
-    const counterEl = document.getElementById("counter");
+        // =========================
+        // ELEMENTS
+        // =========================
 
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-    const shuffleBtn = document.getElementById("shuffle-btn");
+        // =========================
+        // CARD FUNCTIONS
+        // =========================
 
-    let index = 0;
-    let showingAnswer = false;
+        // =========================
+        // BUTTON EVENTS
+        // =========================
 
-    function renderCard(){
-      const a = amendments[index];
-      qText.textContent = "What is the " + getOrdinal(a.number) + " Amendment mainly about?";
-      ordinalLabel.textContent = "Card " + (index+1) + " of " + amendments.length;
-      nameEl.textContent = a.name;
-      tagEl.textContent = a.tag;
-      yearEl.textContent = a.year;
-      summaryEl.textContent = a.summary;
-      counterEl.textContent = "Amendment " + a.number + " / " + amendments.length;
+        // =========================
+        // START
+        // =========================
 
-      // reset to question side when you move to another card
-      showingAnswer = false;
-      card.classList.remove("show-answer");
-    }
+    </script>
 
-    function showNext(){
-      index = (index + 1) % amendments.length;
-      renderCard();
-    }
-
-    function showPrev(){
-      index = (index - 1 + amendments.length) % amendments.length;
-      renderCard();
-    }
-
-    function shuffleCard(){
-      let newIndex = index;
-      while(newIndex === index && amendments.length > 1){
-        newIndex = Math.floor(Math.random() * amendments.length);
-      }
-      index = newIndex;
-      renderCard();
-    }
-
-    card.addEventListener("click", () => {
-      showingAnswer = !showingAnswer;
-      if(showingAnswer){
-        card.classList.add("show-answer");
-      }else{
-        card.classList.remove("show-answer");
-      }
-    });
-
-    nextBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      showNext();
-    });
-
-    prevBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      showPrev();
-    });
-
-    shuffleBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      shuffleCard();
-    });
-
-    // Start with the 1st Amendment
-    renderCard();
-  </script>
 </body>
 </html>
